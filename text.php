@@ -41,7 +41,7 @@ fenster = window.open("http://www.biblio.tu-bs.de/anmeldung2/help.php","PopUp","
 		</head>
 		<body @bodyattr@ >
 
-		<div style="background-color:#DBDBDB;"><a href="http://www.biblio.tu-bs.de"><img src="http://www.biblio.tu-bs.de/anmeldung2/img/logo2.gif" alt="[Ansicht UB Braunschweig]" border="0"></img></a></div>
+		<div style="background-color:#DBDBDB;"><a href="http://www.biblio.tu-bs.de"><img src="http://www.biblio.tu-bs.de/anmeldung2/img/logo.gif" alt="[Ansicht UB Braunschweig]" border="0"></img></a></div>
 		<div><img src="http://www.biblio.tu-bs.de/anmeldung2/img/schmucklinie.gif" width="100%" height="10px" border="0"></img></div>
 
 		<!-- ***** weitere Sprachen *****
