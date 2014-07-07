@@ -1,5 +1,5 @@
 <html><head>
-		<link type="text/css" rel="stylesheet" href="anmeldung.css">
+		<link type="text/css" rel="stylesheet" href="style/anmeldung.css">
 		<title>Browsercheck</title>
 		</head>
 <?php

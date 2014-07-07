@@ -1,0 +1,19 @@
+p,h1,h2,h3,h4,ul,ol,li,div,td,th,address,blockquote,nobr,b,i,body { 
+	font-family:Tahoma,Arial,Helvetica,sans-serif; 
+}
+
+a:link,a:visited,a:active { color:blue ; text-decoration:none }
+
+h1,h2 {
+	font-size: 16
+}
+
+h3,h4,body,table { 
+	font-size: 14
+}
+.dis{
+background: #d6d6d6;
+}
+.enab{
+background: white;
+}

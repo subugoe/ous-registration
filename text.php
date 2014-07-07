@@ -29,7 +29,7 @@ $text_multi['de'] = array(
 
 	'html_header' => '
 		<html><head>
-		<link type="text/css" rel="stylesheet" href="anmeldung.css">
+		<link type="text/css" rel="stylesheet" href="style/anmeldung.css">
 		<!-- ***** FAQ POP-UP ***** -->	
 		<script LANGUAGE="JavaScript">
 function help() {
@@ -37,7 +37,7 @@ fenster = window.open("http://www.biblio.tu-bs.de/anmeldung2/help.php","PopUp","
 }
 </script>
 <!-- ********************** -->
-		<title>Anmeldung zur Benutzung der Universitätsbibliothek</title>
+		<title>Anmeldung zur Benutzung der Universitï¿½tsbibliothek</title>
 		</head>
 		<body @bodyattr@ >
 
@@ -58,7 +58,7 @@ fenster = window.open("http://www.biblio.tu-bs.de/anmeldung2/help.php","PopUp","
 <!-- *************************** -->
 
 <td style="align: left; vertical-align: top;">
-<b><font color="#336699"> <p> Gebühr für Benutzerausweis: 5 EUR</font></b>
+<b><font color="#336699"> <p> Gebï¿½hr fï¿½r Benutzerausweis: 5 EUR</font></b>
 </td>
 	        <td align="right"> <h2>@notabene@</h2> </td>
 		</tr>
@@ -66,7 +66,7 @@ fenster = window.open("http://www.biblio.tu-bs.de/anmeldung2/help.php","PopUp","
 		<hr>
 		',
 // NEU Okt.2008
-//	'user_info' => ' <strong> <p> Gebühr für Benutzerausweis: 5 EUR</strong>   <br></p>',
+//	'user_info' => ' <strong> <p> Gebï¿½hr fï¿½r Benutzerausweis: 5 EUR</strong>   <br></p>',
 		
 	'step1' => 'Schritt ',
 	'step2' => ' von 4',	
@@ -101,7 +101,7 @@ Ich bitte um elektronische Benachrichtigung durch die Universit&auml;tsbibliothe
 		Ausleihe jedoch nicht m&ouml;glich. Die Erhebung der
 		Daten erfolgt lediglich zum Zweck der automatisierten 
 		Ausleihverbuchung, der Online-Fernleihe bzw. der 
-		Internet-Nutzung in den Räumen der Universit&auml;tsbibliothek sowie,
+		Internet-Nutzung in den Rï¿½umen der Universit&auml;tsbibliothek sowie,
 		falls beantragt, zum Zwecke der Benachrichtigung und Mahnung per E-Mail. 
 		Die Daten werden nicht an Dritte weitergegeben.<p>
 		Grundlagen f&uuml;r diese Datenerhebung sind:
@@ -147,9 +147,9 @@ Ich bitte um elektronische Benachrichtigung durch die Universit&auml;tsbibliothe
 		     g&uuml;ltigen Studierendenausweis
 		<li> Mitarbeiterinnen und Mitarbeiter der TU:
 		     zus&auml;tzlich eine Dienstbescheinigung
-		<li> Ab dem 1. Januar 2005 wird für die Ausstellung
-		des Benutzerausweises eine einmalige Gebühr
-		in Höhe von 5 EUR berechnet.
+		<li> Ab dem 1. Januar 2005 wird fï¿½r die Ausstellung
+		des Benutzerausweises eine einmalige Gebï¿½hr
+		in Hï¿½he von 5 EUR berechnet.
 		</ul> <p> 
 
 		<p>
@@ -239,7 +239,7 @@ Ich bitte um elektronische Benachrichtigung durch die Universit&auml;tsbibliothe
 	Sollte die Umleitung nicht funktionieren, klicken Sie bitte
 	<a href="@url@">hier</a>.',
 
-	'sex_m'         => "männlich",
+	'sex_m'         => "mï¿½nnlich",
 	'sex_w'         => "weiblich",
 
 	'status'	=> "Status",
@@ -460,13 +460,13 @@ $buttons_multi['de'] = array(
 	"ok"          => "OK",
 	"cancel"      => "Abbrechen",
 	"next"	      => "Weiter",
-	"prev"	      => "Zurück",
+	"prev"	      => "Zurï¿½ck",
 	"finish"      => "Anmeldung absenden",
 	"print"       => "Ausdrucken",
-	"delete"      => "Löschen",
-	"delete_all"  => "Alle Datensätze löschen",
-	"goto_index"  => "Zurück zur Übersicht",
-	"submit"      => "Nach PICA übernehmen",
+	"delete"      => "Lï¿½schen",
+	"delete_all"  => "Alle Datensï¿½tze lï¿½schen",
+	"goto_index"  => "Zurï¿½ck zur ï¿½bersicht",
+	"submit"      => "Nach PICA ï¿½bernehmen",
 	"edit"        => "Korrigieren"
 );
 //***************************REMOVE ENGLISH**********************************
@@ -492,7 +492,7 @@ $buttons_multi['en'] = array(
 
 $months_multi = array();
 
-$months_multi['de'] = array ( "01" => "Jan", "02" => "Feb", "03" => "Mär",
+$months_multi['de'] = array ( "01" => "Jan", "02" => "Feb", "03" => "Mï¿½r",
 				 "04" => "Apr", "05" => "Mai", "06" => "Jun",
 				 "07" => "Jul", "08" => "Aug", "09" => "Sep", 
 				 "10" => "Okt", "11" => "Nov", "12" => "Dez" ); 
@@ -521,14 +521,14 @@ $field_labels['de'] = array(
 	'birthday'      => "Geburtsdatum",
 	'usertype'      => "Nutzertyp",
 	'student_id'    => "Matrikelnummer",
-	'email_checkbox' => "Benachrichtigung per E-Mail<br />Falls gew&uuml;nscht, nebenstehend Haken setzen. Näheres siehe unten!*",
+	'email_checkbox' => "Benachrichtigung per E-Mail<br />Falls gew&uuml;nscht, nebenstehend Haken setzen. Nï¿½heres siehe unten!*",
 	'email'	=> "E-Mail-Adresse",
 	'email_confirm' => "E-Mail-Adresse (Wdh.)",
 	'carry_over_1'  => "c/o",
 	'street_1'      => "Str.",
-//  TESTANZEIGE PICA USER GROUP --- NICHT FÜR PRODUKTIVBETRIEB !!!!!!!!!!!!!!	
+//  TESTANZEIGE PICA USER GROUP --- NICHT Fï¿½R PRODUKTIVBETRIEB !!!!!!!!!!!!!!	
 //	'pica_user_group' => "TEST: Pica User Group",
-//  TESTANZEIGE PICA USER GROUP --- NICHT FÜR PRODUKTIVBETRIEB !!!!!!!!!!!!!!
+//  TESTANZEIGE PICA USER GROUP --- NICHT Fï¿½R PRODUKTIVBETRIEB !!!!!!!!!!!!!!
 	"house_1"       => "Nr.",
 	"room_1"        => "Zimmer",
 	"zip_1"  	=> "PLZ",
