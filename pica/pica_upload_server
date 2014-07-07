@@ -1,0 +1,78 @@
+#!/usr/bin/perl
+
+# NOTE: start this server as user 'lbsprod' !
+
+use Socket;
+use IO::Handle;
+
+## configuration section
+
+my $port=4096;
+my @ip_ok = ( '1.2.3.4' );
+my $password = 'mysecret';
+
+my $datafile='/pica/prod/asc/ousp_upd_borrower.asc';
+my $logfile='/pica/prod/log/ousp_upd_borrower.txt';
+
+my $cmd='PATH=/usr/bin:/pica/prod/com:/usr/sbin ; export PATH;
+	 . /pica/lbs_system/define_lbs_env ;
+	 . /pica/lbs_system/define_prod ;
+	 /usr/bin/echo "y" | /pica/prod/com/doe ousp_upd_borrower > /dev/null';
+
+#my $cmd = 'cp ' . $datafile . ' ' . $logfile;
+
+## end configuration 
+
+my $proto = getprotobyname('tcp');
+
+socket(Server, PF_INET, SOCK_STREAM, $proto)        || die "socket: $!";
+setsockopt(Server, SOL_SOCKET, SO_REUSEADDR, pack("l", 1)) || 
+	die "setsockopt: $!";
+bind(Server, sockaddr_in($port, INADDR_ANY))        || die "bind: $!";
+listen(Server,SOMAXCONN)                            || die "listen: $!";
+
+for ( ; $paddr = accept(Client,Server); close Client) {
+        my($port,$iaddr) = sockaddr_in($paddr);
+
+	Client->autoflush(1);
+
+	$addr = inet_ntoa($iaddr);
+
+	$ok = 0;
+
+	foreach $ip (@ip_ok) {
+		$ok = ($ip eq $addr) ? 1 : $ok; 
+		# print "ip=$ip, addr=$addr, ok=$ok \n";
+	}
+
+	if ($ok) {
+	     chomp($pw = <Client>);
+	     $pw =~ s/\r$//;
+	     $ok = ($password eq $pw);
+	     # print "pw1=$password, pw2=$pw, ok=$ok \n";
+	}
+
+	if ($ok) {
+
+	     -f $logfile && ( unlink($logfile) || next );
+	     -f $datafile && ( unlink($datafile) || next );
+
+	     open (DATA,'>' . $datafile) || next;
+	     while (<Client>) {
+		last if $_ =~ /^eof/;
+	 	print DATA $_;
+	     }
+	     close(DATA) || next;
+		
+	     system($cmd);
+
+	     open (LOG,'<' . $logfile) || next;
+	     while (<LOG>) { 
+	      	print Client $_;
+	     }
+	     close(LOG);
+	}
+}
+
+close(Server);
+

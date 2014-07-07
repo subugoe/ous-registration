@@ -1,0 +1,45 @@
+#
+USAGE="Usage: $0  {start | stop}"
+PATH=/sbin:/usr/sbin:/usr/bin:/bin ; export PATH
+
+pica_upload=/pica/bs/com/pica_upload_server
+pidfile=/var/run/pica_upload.pid
+
+if [ $# -lt 1 ]
+then
+        echo "$USAGE"
+        exit 1
+fi 
+
+case $1 in 
+
+'start')
+
+echo "Starting pica_upload ..."
+
+if [ -x "$pica_upload" ] ;
+	then
+        nohup su lbs_prod -c $pica_upload > /dev/null &
+	echo $! > "$pidfile"
+        echo  "... done"
+fi
+;;
+
+'stop')
+
+echo "Stopping pica_upload ..."
+if [ -f "$pidfile" ] ;
+then
+	kill `cat $pidfile` 
+	rm -f $pidfile
+        echo  "... done"
+fi
+
+;;
+
+*)
+
+        echo "$USAGE"
+        exit 1
+
+esac

@@ -1,0 +1,44 @@
+#!/opt/perl/bin/perl
+
+use Socket;
+use IO::Handle;
+
+## configuration section
+
+my $remote="picaserver.my.library";
+my $port=4096;
+my $password='mysecret';
+## end configuration 
+
+$iaddr   = inet_aton($remote)               || die "no host: $remote";
+$paddr   = sockaddr_in($port, $iaddr);
+
+$proto   = getprotobyname('tcp');
+socket(SOCK, PF_INET, SOCK_STREAM, $proto)  || die "socket: $!";
+connect(SOCK, $paddr)    		    || die "connect: $!";
+
+SOCK->autoflush(1);
+STDIN->autoflush(1);
+
+#print "step 1\n";
+
+print SOCK "$password\n" || die "print: $!"; 
+
+while (<STDIN>) {
+	print SOCK $_ || die "print: $!"; ;
+}
+print SOCK "eof\n" || die "print: $!"; ;
+
+#print "step 2\n";
+
+$ok = 0;
+
+while (<SOCK>) {
+     print $_ ;
+     $ok = ($_ =~ /^Anzahl aufgenommene Nutzer : [1-9]/) ? 1 : $ok;
+     last if ($ok);
+}
+
+#print "step 3\n";
+
+exit(($ok) ? 0 : 1);
