@@ -41,8 +41,8 @@ fenster = window.open("http://www.biblio.tu-bs.de/anmeldung2/help.php","PopUp","
 		</head>
 		<body @bodyattr@ >
 
-		<div style="background-color:#DBDBDB;"><a href="http://www.biblio.tu-bs.de"><img src="http://www.biblio.tu-bs.de/anmeldung2/img/logo.gif" alt="[Ansicht UB Braunschweig]" border="0"></img></a></div>
-		<div><img src="http://www.biblio.tu-bs.de/anmeldung2/img/schmucklinie.gif" width="100%" height="10px" border="0"></img></div>
+		<div style="background-color:#DBDBDB;"><a href="http://www.biblio.tu-bs.de"><img src="./img/local/logo.gif" alt="[Ansicht UB Braunschweig]" border="0"></img></a></div>
+		<div><img src="./img/schmucklinie.gif" width="100%" height="10px" border="0"></img></div>
 
 		<!-- ***** weitere Sprachen *****
 		<img src="lang-de-sel.png" alt="deutsch" border=0>&nbsp;<a href="@url-en@"><img src="lang-en.png" alt="english" border=0></a>
@@ -54,7 +54,7 @@ fenster = window.open("http://www.biblio.tu-bs.de/anmeldung2/help.php","PopUp","
  		
 <tr>
 <!-- *********** FAQ *********** -->		
-<td style="align: left; vertical-align: bottom; width:35px; height:35px;"><a href="JavaScript:help()"><img src="http://www.biblio.tu-bs.de/anmeldung2/img/help.gif" alt="Hilfe" title="Online-Anmeldung FAQ" border=0 height=30px width=30px></a></td>
+<td style="align: left; vertical-align: bottom; width:35px; height:35px;"><a href="JavaScript:help()"><img src="./img/help.gif" alt="Hilfe" title="Online-Anmeldung FAQ" border=0 height=30px width=30px></a></td>
 <!-- *************************** -->
 
 <td style="align: left; vertical-align: top;">
@@ -206,7 +206,7 @@ Ich bitte um elektronische Benachrichtigung durch die Universit&auml;tsbibliothe
 		<pre>@msg@</pre> <p>
 		<a href="index.php?lang=de">Weiter ...</a> ',
 
-	"error" => "<img src=\"err.png\" alt=\"[X]\"> &nbsp;", 
+	"error" => "<img src=\"./img/err.png\" alt=\"[X]\"> &nbsp;",
 
 	"error_msg" => ' <strong>Fehlende oder ung&uuml;ltige Eingabe!</strong>
 		Bitte die markierten Felder korrigieren!<br><br>',
@@ -273,7 +273,7 @@ $text_multi['en'] = array(
 		<td align="left">	
 		<img src="http://www.biblio.tu-bs.de/images/ubdraw2.gif">
 		</td><td align="right">	
-		<a href="@url-de@"><img border=0 src="lang-de.png" alt="deutsch"></a>&nbsp;<img src="lang-en-sel.png" border=0 alt="english">
+		<a href="@url-de@"><img border=0 src="./img/lang-de.png" alt="deutsch"></a>&nbsp;<img src="./img/lang-en-sel.png" border=0 alt="english">
 		</td>
  		</tr>
 		<tr valign="bottom" >
@@ -400,7 +400,7 @@ $text_multi['en'] = array(
 		<a href="index.php?lang=en">Continue ...</a>
 		',
 
-	"error" => "<img src=\"err.png\" alt=\"[X]\"> &nbsp;", 
+	"error" => "<img src=\"./img/err.png\" alt=\"[X]\"> &nbsp;",
 
 	"error_msg" => ' <strong>Invalid entry!</strong>
 		Please correct the fields marked with a cross!<br><br>',
