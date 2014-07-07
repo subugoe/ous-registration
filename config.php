@@ -10,11 +10,11 @@
 /// \brief configuration file for the public-access application web form
 ///
 
-$dbhost="localhost"; 	
-$dbname="application"; 	
+$dbhost = "localhost";
+$dbname = "application";
 
-$dbuser="nostaff";
-$dbpass="secret1";
+$dbuser = "nostaff";
+$dbpass = "secret1";
 
 // $dbuser="root";
 // $dbpass="";

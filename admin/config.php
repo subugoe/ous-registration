@@ -8,7 +8,7 @@
 /// \file 
 /// \brief configuration file for the web frontend for library staff
 
-$iln = '99';		///< \brief ILN number of the library
+$iln = '99'; ///< \brief ILN number of the library
 
 /// \brief command for PICA export
 ///
@@ -22,7 +22,7 @@ $iln = '99';		///< \brief ILN number of the library
 /// input format expected by oups_upd_borrower.
 
 
-$pica_export_command="../pica/pica_upload_client > /dev/null";
+$pica_export_command = "../pica/pica_upload_client > /dev/null";
 
 // Print test File to 
 //$pica_export_command="cat > /tmp/pica.out"; 
@@ -32,26 +32,26 @@ $pica_export_command="../pica/pica_upload_client > /dev/null";
 
 // pica
 
-$LBSServer = "picaserver.my.library.org";	
-$LBSDB = "lbsdb";	
-$LBSUser = "picauser"; 
-$LBSPw = "picapassword";	
+$LBSServer = "picaserver.my.library.org";
+$LBSDB = "lbsdb";
+$LBSUser = "picauser";
+$LBSPw = "picapassword";
 
 
 // mysql 
 
-$dbhost="localhost";
-$dbname="application";
+$dbhost = "localhost";
+$dbname = "application";
 
-$dbuser="staff";
-$dbpass="secret2";
+$dbuser = "staff";
+$dbpass = "secret2";
 
 // delete users that have not been confirmed for ... days
-$too_old=30;
+$too_old = 30;
 
 // $dbuser="root";		
 // $dbpass="";
 
-$lang_default="de";
+$lang_default = "de";
 
 ?>

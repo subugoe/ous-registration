@@ -439,8 +439,7 @@ $fields = array(
 ///
 /// \returns nothing
 
-function fields_init($link, $lang)
-{
+function fields_init($link, $lang) {
     global $field_labels, $fields, $text_multi;
 
     $q = "select usertype_names.usertype_id, usertype_names.name "
@@ -454,11 +453,13 @@ function fields_init($link, $lang)
             $row["name"];
 
     foreach ($fields as $k => $v) {
-        if (!isset($v['pica_query']))
+        if (!isset($v['pica_query'])) {
             $fields[$k]['pica_query'] = $v['query'];
+        }
 
-        if (!isset($v['view_query']))
+        if (!isset($v['view_query'])) {
             $fields[$k]['view_query'] = $v['query'];
+        }
     }
 
     ## assign field labels
@@ -485,8 +486,7 @@ function fields_init($link, $lang)
 ///
 /// \returns HTML code
 
-function input_control($field, $name, $value)
-{
+function input_control($field, $name, $value) {
     global $fields;
 
     if (isset($fields[$field])) {
@@ -501,53 +501,62 @@ function input_control($field, $name, $value)
             print $f["javascript"] . '>';
 
         } // ***** E-MAIL CHECKBOX *****
-        else if ($f["type"] == "checkbox") {
-            if ($name == "email_checkbox" && $value == "")
-                $value = "f";
+        else {
+            if ($f["type"] == "checkbox") {
+                if ($name == "email_checkbox" && $value == "") {
+                    $value = "f";
+                }
 
-            print '<input type="checkbox" name="' . $name . '" ';
-            print 'value="' . htmlentities($value) . '"';
-            print $f["javascript"];
+                print '<input type="checkbox" name="' . $name . '" ';
+                print 'value="' . htmlentities($value) . '"';
+                print $f["javascript"];
 
-        } else if ($f["type"] == "choice") {
-            // ***** USERTYPE MIT E-MAIL
-            if ($value > 19 && $name == "usertype") {
-                $value = $value - 20;
+            } else {
+                if ($f["type"] == "choice") {
+                    // ***** USERTYPE MIT E-MAIL
+                    if ($value > 19 && $name == "usertype") {
+                        $value = $value - 20;
 
+                    }
+
+                    print '<select name="' . $name . '">';
+                    foreach ($f["choices"] as $k => $v) {
+                        print '<option value="' . htmlentities($k) . '"';
+                        if ($k == $value) {
+                            print ' selected="yes" ';
+                        }
+                        print '>';
+                        print htmlentities($v);
+                        print '</option>';
+                    }
+                    print '</select>';
+                } else {
+                    if ($f["type"] == "date") {
+                        global $months;
+
+                        list($year, $month, $day) = split('-', $value, 3);
+
+                        print '<input type="text" name="' . $name . '_day" ';
+                        print 'size="2" maxlength="2" value="' . $day . '"> &nbsp;';
+
+                        print '<select name="' . $name . '_month">';
+                        foreach ($months as $k => $v) {
+                            print '<option value="' . htmlentities($k) . '"';
+                            if ($k == $month) {
+                                print ' selected="yes" ';
+                            }
+                            print '>';
+                            print htmlentities($v);
+                            print '</option>';
+                        }
+                        print '</select>';
+
+                        print '&nbsp; <input type="text" name="' . $name . '_year" ';
+                        print 'size="4" maxlength="4" value="' . $year . '">';
+
+                    }
+                }
             }
-
-            print '<select name="' . $name . '">';
-            foreach ($f["choices"] as $k => $v) {
-                print '<option value="' . htmlentities($k) . '"';
-                if ($k == $value)
-                    print ' selected="yes" ';
-                print '>';
-                print htmlentities($v);
-                print '</option>';
-            }
-            print '</select>';
-        } else if ($f["type"] == "date") {
-            global $months;
-
-            list($year, $month, $day) = split('-', $value, 3);
-
-            print '<input type="text" name="' . $name . '_day" ';
-            print 'size="2" maxlength="2" value="' . $day . '"> &nbsp;';
-
-            print '<select name="' . $name . '_month">';
-            foreach ($months as $k => $v) {
-                print '<option value="' . htmlentities($k) . '"';
-                if ($k == $month)
-                    print ' selected="yes" ';
-                print '>';
-                print htmlentities($v);
-                print '</option>';
-            }
-            print '</select>';
-
-            print '&nbsp; <input type="text" name="' . $name . '_year" ';
-            print 'size="4" maxlength="4" value="' . $year . '">';
-
         }
     }
 

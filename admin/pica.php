@@ -31,164 +31,175 @@ require_once('../util.php');
 /// calling this function.
 
 function export_to_pica($dblink, $id, $barcode) {
-	global $text;
-	global $fields;
-	global $iln;
-	global $pica_export_command;
+    global $text;
+    global $fields;
+    global $iln;
+    global $pica_export_command;
 
 // default values 
 
-	$pica = array(
-		"a000" => $iln,		// ILN
-		"a100" => "U",		// Update	
-		"a104" => "0",		// user status (loan allowed)
-		"a111" => "1",		// Nummer der Mahnadresse
-		"a200" => "U",		// Update
-		"a201" => "001",	// Abteilungsgruppen-Nummer
-		"a300" => "U",		// Update
-		"a301" => "1",		// 1: extern, 0: intern
-		"b400" => "U"		// Update
-	); 
+    $pica = array(
+        "a000" => $iln, // ILN
+        "a100" => "U", // Update
+        "a104" => "0", // user status (loan allowed)
+        "a111" => "1", // Nummer der Mahnadresse
+        "a200" => "U", // Update
+        "a201" => "001", // Abteilungsgruppen-Nummer
+        "a300" => "U", // Update
+        "a301" => "1", // 1: extern, 0: intern
+        "b400" => "U" // Update
+    );
 
 // query database, assign results to $pica[] array
 
-	foreach ($fields as $f) {
+    foreach ($fields as $f) {
 
-		$q = (isset($f["pica_query"])) ? $f["pica_query"] : $f["query"];
-		$r = db_query_mysql($dblink, $q, array("@id@" => $id));
+        $q = (isset($f["pica_query"])) ? $f["pica_query"] : $f["query"];
+        $r = db_query_mysql($dblink, $q, array("@id@" => $id));
 
-		$k = (isset($f["pica_field"])) ? $f["pica_field"] : "" ;
+        $k = (isset($f["pica_field"])) ? $f["pica_field"] : "";
 
-		if ((!empty($k)) and (!empty($r)))  
-			$pica[$k] .=  $r[1][0] . " ";
-	}
+        if ((!empty($k)) and (!empty($r))) {
+            $pica[$k] .= $r[1][0] . " ";
+        }
+    }
 
 // strip trailing blanks
 
-	foreach ($fields as $f) {
-		$k = (isset($f["pica_field"])) ? $f["pica_field"] : "" ;
-		if (!empty($k))
-			$pica[$k] = preg_replace("/ $/","", $pica[$k]);
-	}
+    foreach ($fields as $f) {
+        $k = (isset($f["pica_field"])) ? $f["pica_field"] : "";
+        if (!empty($k)) {
+            $pica[$k] = preg_replace("/ $/", "", $pica[$k]);
+        }
+    }
 
 // do postprocessing
 
 // date of creation
-	$pica["a001"] = strftime('%d-%m-%Y');	
+    $pica["a001"] = strftime('%d-%m-%Y');
 
 // barcode
 
-	if (!empty($barcode))
-		$pica["a102"] = $barcode;
+    if (!empty($barcode)) {
+        $pica["a102"] = $barcode;
+    }
 
 // create serial number
 
-	if (!isset($pica["a114"]) or ($pica["a114"] == "")) {
-		$qs = array(
-			"lock tables serial_number write ", 
-			"update serial_number set number=0, " .
-			" time=CURDATE() where YEAR(time) != YEAR(CURDATE()) ",
-			" update serial_number set number=number+1 ",
-			" select DATE_FORMAT(time,'%y'), number " . 
-			" from serial_number "
-		);
+    if (!isset($pica["a114"]) or ($pica["a114"] == "")) {
+        $qs = array(
+            "lock tables serial_number write ",
+            "update serial_number set number=0, " .
+            " time=CURDATE() where YEAR(time) != YEAR(CURDATE()) ",
+            " update serial_number set number=number+1 ",
+            " select DATE_FORMAT(time,'%y'), number " .
+            " from serial_number "
+        );
 
-		foreach ($qs as $q) 
-			$r = db_query_mysql($dblink,$q, array());
+        foreach ($qs as $q)
+            $r = db_query_mysql($dblink, $q, array());
 
-		if (!empty($r))   {
-			$pica["a114"]  = $r[1][0] . '/' . $r[1][1];
-		}
+        if (!empty($r)) {
+            $pica["a114"] = $r[1][0] . '/' . $r[1][1];
+        }
 
-		db_query_mysql($dblink,"unlock tables", array());
+        db_query_mysql($dblink, "unlock tables", array());
 
-	}
+    }
 
 
 // fix registration number (student id, or Nota Bene ID) 
 
-	$q = $fields["usertype"]["query"];
-	$r = db_query_mysql($dblink, $q, array('@id@' => $id));
+    $q = $fields["usertype"]["query"];
+    $r = db_query_mysql($dblink, $q, array('@id@' => $id));
 
- if (!empty($r))   {
-  $usertype = $r[1][0];
+    if (!empty($r)) {
+        $usertype = $r[1][0];
 // ***** ERWEITERTE NUTZERTYPEN *****
-    if ($usertype == 1 || $usertype == 21)
-   $pica["a101"] = "" . $pica["a101"]; 
-   else if ($usertype == 2 || $usertype == 22)
-   $pica["a101"] = "FH" . $pica["a101"]; 
-  else if ($usertype == 3 || $usertype == 23)
-   $pica["a101"] = "HBK" . $pica["a101"]; 
-  else if (($usertype >= 4) && ($usertype !=21 || $usertype !=22 || $usertype !=23))
-   $pica["a101"] = "NB" . 
-    strtr($pica["a114"],array( "/" => "" )) ; 
- }
+        if ($usertype == 1 || $usertype == 21) {
+            $pica["a101"] = "" . $pica["a101"];
+        } else {
+            if ($usertype == 2 || $usertype == 22) {
+                $pica["a101"] = "FH" . $pica["a101"];
+            } else {
+                if ($usertype == 3 || $usertype == 23) {
+                    $pica["a101"] = "HBK" . $pica["a101"];
+                } else {
+                    if (($usertype >= 4) && ($usertype != 21 || $usertype != 22 || $usertype != 23)) {
+                        $pica["a101"] = "NB" .
+                            strtr($pica["a114"], array("/" => ""));
+                    }
+                }
+            }
+        }
+    }
 
 // check reg no
 
-if (!check_registration_number($pica["a101"])) {
-	$kw = array ( 
-		'@notabene@' => "",  
-		'@bodyattr@' => "",
-		'@url-de@' => "index.php?lang=de", 
-		'@url-en@' => "index.php?lang=en",
-		'@regno@' => $pica['a101']); 
+    if (!check_registration_number($pica["a101"])) {
+        $kw = array(
+            '@notabene@' => "",
+            '@bodyattr@' => "",
+            '@url-de@' => "index.php?lang=de",
+            '@url-en@' => "index.php?lang=en",
+            '@regno@' => $pica['a101']);
 
-	print_header($kw);
-	print strtr($text['conflict_regno'],$kw);
-	print_footer($kw);
-	exit(0);
-}
+        print_header($kw);
+        print strtr($text['conflict_regno'], $kw);
+        print_footer($kw);
+        exit(0);
+    }
 
 // write serial number into database
 
-$q = $fields["notabene"]["update"];
-$kw = array( '@id@' => $id, '@val@' => $pica["a114"]);
+    $q = $fields["notabene"]["update"];
+    $kw = array('@id@' => $id, '@val@' => $pica["a114"]);
 
-db_query_mysql($dblink, $q, $kw);
+    db_query_mysql($dblink, $q, $kw);
 
 
 // determine whether we've got a second address
 // create header if necessary
 
-	$second_address = FALSE;
+    $second_address = FALSE;
 
-	foreach ( $pica as $k => $v ) {
-		if (strpos($k,"b3") === 0 and ($v != "") )  {
-			$second_address = TRUE;
-		}
-	}
+    foreach ($pica as $k => $v) {
+        if (strpos($k, "b3") === 0 and ($v != "")) {
+            $second_address = TRUE;
+        }
+    }
 
-	if ($second_address) {
-		$pica["b300"] = "U";
-		$pica["b301"] = "2";
-	}
+    if ($second_address) {
+        $pica["b300"] = "U";
+        $pica["b301"] = "2";
+    }
 
 // create export file
 
-	ksort($pica); 		// sort by key
-	reset($pica);
+    ksort($pica); // sort by key
+    reset($pica);
 
-	$export = "";
+    $export = "";
 
-	foreach ($pica as $k => $v) {
-		$k = preg_replace("/^[a-zA-Z]/", "", $k);
-		if ($v != "")
-			$export .= "$k $v\n";
-	}
+    foreach ($pica as $k => $v) {
+        $k = preg_replace("/^[a-zA-Z]/", "", $k);
+        if ($v != "") {
+            $export .= "$k $v\n";
+        }
+    }
 
 
 // do character translation for german umlauts
 
-	$export = strtr($export,"ÄÖÜäöüß", "\301\302\303\321\322\323\276");
-		
+    $export = strtr($export, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "\301\302\303\321\322\323\276");
+
 // run export command
 
 // print "<pre>$export</pre>";
-	($handle = popen($pica_export_command, "w")) or 
-		error_msg("could not run command: $pica_export_command");
-	fwrite($handle, $export) or error_msg("pipe broken"); 	
-	return pclose($handle);	
+    ($handle = popen($pica_export_command, "w")) or
+    error_msg("could not run command: $pica_export_command");
+    fwrite($handle, $export) or error_msg("pipe broken");
+    return pclose($handle);
 }
 
 
@@ -213,30 +224,30 @@ db_query_mysql($dblink, $q, $kw);
 ///          and FALSE if it is not unique or the database query 
 ///	     failed for some reason
 
-function check_registration_number($regnum)  {
+function check_registration_number($regnum) {
 
-global $LBSServer;
-global $LBSDB;
-global $LBSUser;
-global $LBSPw;
-global $iln;
+    global $LBSServer;
+    global $LBSDB;
+    global $LBSUser;
+    global $LBSPw;
+    global $iln;
 
-($lnk = @ sybase_pconnect($LBSServer,$LBSUser,$LBSPw)) or error_msg("SYBASE: pconnect failed");
+    ($lnk = @ sybase_pconnect($LBSServer, $LBSUser, $LBSPw)) or error_msg("SYBASE: pconnect failed");
 
-(@ sybase_select_db($LBSDB,$lnk)) or error_msg("SYBASE: database $LBSDB not found");
+    (@ sybase_select_db($LBSDB, $lnk)) or error_msg("SYBASE: database $LBSDB not found");
 
-$q = "select * from borrower where " . "registration_number = '@regnum@' and iln = $iln";
+    $q = "select * from borrower where " . "registration_number = '@regnum@' and iln = $iln";
 // . "registration_number = '@regnum@'";
 
 
-$regnum = strtr($regnum, array( "'" => "''", "%" => "" ));
-$q = strtr($q, array( "@regnum@" => $regnum));
+    $regnum = strtr($regnum, array("'" => "''", "%" => ""));
+    $q = strtr($q, array("@regnum@" => $regnum));
 
 // print $q;
 
-( $res = sybase_query($q, $lnk) ) or error_msg("SYBASE: database query failed");
+    ($res = sybase_query($q, $lnk)) or error_msg("SYBASE: database query failed");
 
-return (($res) and (sybase_num_rows($res) > 0)) ? FALSE : TRUE;
+    return (($res) and (sybase_num_rows($res) > 0)) ? FALSE : TRUE;
 }
 
 /// \brief avoid double membership
@@ -254,94 +265,95 @@ return (($res) and (sybase_num_rows($res) > 0)) ? FALSE : TRUE;
 /// We expect the applicant <em>not</em> to be a library user 
 /// yet, so this function should return an empty list.
 
-function check_for_doubles($dblink, $id)  {
-global $fields;
+function check_for_doubles($dblink, $id) {
+    global $fields;
 
-global $LBSServer;
-global $LBSDB;
-global $LBSUser;
-global $LBSPw;
-global $iln;
-
-
-$birthday = "0000-00-00";
-
-$q =  $fields["last_name"]["query"];
-$r = db_query_mysql($dblink, $q, array('@id@' => $id));
-
-$name = (isset($r[1][0])) ? $r[1][0] : "";
-
-$q =  $fields["birthday"]["query"];
-$r = db_query_mysql($dblink, $q, array('@id@' => $id));
-
-$birthday = (isset($r[1][0])) ? $r[1][0] : "";
-
-if (empty($name) or empty($birthday))
-	return FALSE;
-
-list ($year,$month,$day)  = split('-', $birthday);
+    global $LBSServer;
+    global $LBSDB;
+    global $LBSUser;
+    global $LBSPw;
+    global $iln;
 
 
-$months_by_name = array (
-	"01" => "Jan", "02" => "Feb", "03" => "Mar", "04" => "Apr",
-	"05" => "May", "06" => "Jun", "07" => "Jul", "08" => "Aug",
-	"09" => "Sep", "10" => "Oct", "11" => "Nov", "12" => "Dec" );
+    $birthday = "0000-00-00";
 
-$users = array();
+    $q = $fields["last_name"]["query"];
+    $r = db_query_mysql($dblink, $q, array('@id@' => $id));
 
-($lnk = @ sybase_pconnect($LBSServer,$LBSUser,$LBSPw)) or error_msg("SYBASE: pconnect failed");
+    $name = (isset($r[1][0])) ? $r[1][0] : "";
 
-(@ sybase_select_db($LBSDB,$lnk)) or error_msg("SYBASE: database $LBSDB not found");
+    $q = $fields["birthday"]["query"];
+    $r = db_query_mysql($dblink, $q, array('@id@' => $id));
+
+    $birthday = (isset($r[1][0])) ? $r[1][0] : "";
+
+    if (empty($name) or empty($birthday)) {
+        return FALSE;
+    }
+
+    list ($year, $month, $day) = split('-', $birthday);
+
+
+    $months_by_name = array(
+        "01" => "Jan", "02" => "Feb", "03" => "Mar", "04" => "Apr",
+        "05" => "May", "06" => "Jun", "07" => "Jul", "08" => "Aug",
+        "09" => "Sep", "10" => "Oct", "11" => "Nov", "12" => "Dec");
+
+    $users = array();
+
+    ($lnk = @ sybase_pconnect($LBSServer, $LBSUser, $LBSPw)) or error_msg("SYBASE: pconnect failed");
+
+    (@ sybase_select_db($LBSDB, $lnk)) or error_msg("SYBASE: database $LBSDB not found");
 
 
 // extract last name
 
-$users = array();
+    $users = array();
 
-$q = "select name,first_name_initials_prefix,gender,date_of_birth," . 
-     "borrower_bar,borrower_status from borrower where " .  
-     "LOWER(name) LIKE '%@name@%' and " .
-     "date_of_birth = '@birth@' and iln = $iln";
+    $q = "select name,first_name_initials_prefix,gender,date_of_birth," .
+        "borrower_bar,borrower_status from borrower where " .
+        "LOWER(name) LIKE '%@name@%' and " .
+        "date_of_birth = '@birth@' and iln = $iln";
 
-$birth = $months_by_name[$month] . " " . $day . " " . $year;
-$names = explode(" ", $name);
-$name  = $names[count($names) - 1];
-$name = strtr($name, array( "'" => "''", "%" => "" ));
+    $birth = $months_by_name[$month] . " " . $day . " " . $year;
+    $names = explode(" ", $name);
+    $name = $names[count($names) - 1];
+    $name = strtr($name, array("'" => "''", "%" => ""));
 
 // umlaut translation
-$name = strtolower(strtr($name,"ÄÖÜäöüß", "_______"));
+    $name = strtolower(strtr($name, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "_______"));
 
-$q = strtr($q, array( "@name@" => $name, "@birth@" => $birth ));
+    $q = strtr($q, array("@name@" => $name, "@birth@" => $birth));
 
-( $erg = sybase_query($q, $lnk) ) or error_msg("SYBASE: database query failed");
-
-
-if ($erg) {
-     $i = 0;
-	
-      while ($row = sybase_fetch_array($erg)) {
-
-		// umlaut back-translation
-
-		$row["name"] = strtr($row["name"],
-		                     "\301\302\303\321\322\323\276",
-				     "ÄÖÜäöüß"
-				);
-		$row["first_name_initials_prefix"] = strtr(
-				     $row["first_name_initials_prefix"],
-		                     "\301\302\303\321\322\323\276",
-				     "ÄÖÜäöüß"
-				 );
-
-		$users[$i] = $row;
-		$i++;
-      }
-}
+    ($erg = sybase_query($q, $lnk)) or error_msg("SYBASE: database query failed");
 
 
-sybase_close($lnk);
+    if ($erg) {
+        $i = 0;
 
-return $users;
+        while ($row = sybase_fetch_array($erg)) {
+
+            // umlaut back-translation
+
+            $row["name"] = strtr($row["name"],
+                "\301\302\303\321\322\323\276",
+                "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
+            );
+            $row["first_name_initials_prefix"] = strtr(
+                $row["first_name_initials_prefix"],
+                "\301\302\303\321\322\323\276",
+                "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
+            );
+
+            $users[$i] = $row;
+            $i++;
+        }
+    }
+
+
+    sybase_close($lnk);
+
+    return $users;
 }
 
 ?>

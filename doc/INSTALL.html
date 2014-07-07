@@ -17,95 +17,100 @@ such a configuration to work, we would be grateful to hear from you.
 Please send mail to Carsten Elsner &lt;el@biblio.tu-bs.de&gt;.<br>
 <br>
 <span style="font-weight: bold;">WARNING:</span><br>
+
 <div style="margin-left: 40px;"><br>
-These installation notes are still very incomplete, highly beta, and
-probably outdated, misguiding, or just plain wrong. Follow these
-instructions, and your computer will catch fire and burn, your wive and
-kids will leave you, and your car will break down. You have been
-warned! ;) <br>
+    These installation notes are still very incomplete, highly beta, and
+    probably outdated, misguiding, or just plain wrong. Follow these
+    instructions, and your computer will catch fire and burn, your wive and
+    kids will leave you, and your car will break down. You have been
+    warned! ;) <br>
 </div>
 <br>
+
 <h3>Prerequisites</h3>
 <ul>
-  <li>Unix OS (e.g. Solaris, Linux, ...)<br>
-    <br>
-  </li>
-  <li>Perl 5.x (<a href="http://www.cpan.org">www.cpan.org</a>)<br>
-    <br>
-  </li>
-  <li>Apache 2.x &nbsp;&nbsp; (<a href="http://httpd.apache.org">httpd.apache.org</a>)<br>
-    <br>
-Perform a standard installation of Apache.<br>
-    <br>
-  </li>
-  <li>Sybase, *or* FreeTDS (<a href="http://www.freetds.org">www.freetds.org</a>)<br>
-    <br>
-The Sybase libraries are required for compiling PHP with Sybase support.<br>
-    <br>
-You will have to edit the "interfaces" file of your sybase installation
-and set up a section for your PICA LBS server (host name, port, etc):<br>
-    <br>
-If you do <span style="font-style: italic;">not</span> have a Sybase
-license for your operating system, you may be able to use FreeTDS
-instead (untested). FreeTDS is a&nbsp; "open source" implementation of
-the Sybase network protocol. <br>
-    <br>
-You will also have to add a section to your "interfaces" file in the
-Sybase directory, like this, assuming your PICA server has the IP
-address 1.2.3.4:<br>
-    <br style="font-weight: bold;">
-    <div style="margin-left: 40px;">picaserver<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;query tcp
-ether 1.2.3.4 2025<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;master
-tcp ether 1.2.3.4 2025<br>
-    </div>
-    <br>
-If you use FreeTDS, please consult the documentation on configuration
-instructions.<br>
-    <br>
-  </li>
-  <li>MySQL (<a href="http://www.mysql.org">www.mysql.org</a>)<br>
-    <br>
-Please use version 4.0.17 or newer. Older versions have not been tested.<br>
-    <br>
-    <span style="font-weight: bold;">WARNING:</span><br>
-    <br>
-    <div style="margin-left: 40px;">If you use these scripts in a
-production environment,&nbsp;<span style="font-weight: bold;"></span><span
- style="font-weight: bold;">please </span>make sure that you secure
-your MySQL installation! <br>
-    <br>
-&nbsp;E.g., set a password for the database administrator (DBA), drop
-the "test" database, etc. The script "mysql_secure_installation",&nbsp;
-which is part of the MySQL distribution, will perform most of these
-tasks automatically.<br>
-    <br>
-Also, you must take care of performing regular backups ("dumps") of
-your data base.<br>
-    <br>
-    </div>
-  </li>
-  <li>PHP 4.x (<a href="http://www.php.net">www.php.net</a>)<br>
-    <br>
-PHP must be compiled with Sybase and MySQL support, using the
-"--with-sybase and "--with-mysql" configure options. You should
-also&nbsp; compile PHP as an apache2 module, i.e.
-"--with-apxs2=/path/to/apache/bin/apxs2".<br>
-    <br>
-Set up your httpd.conf so that Apache uses the PHP module,&nbsp; and so
-that files with the ".php" extension are parsed by the PHP interpreter.
-This is described in detail in the PHP installation manual.<br>
-    <br>
-    <span style="font-weight: bold;">NOTE: </span>PHP 5.x is untested,
-and may or may not work!<br>
-  </li>
+    <li>Unix OS (e.g. Solaris, Linux, ...)<br>
+        <br>
+    </li>
+    <li>Perl 5.x (<a href="http://www.cpan.org">www.cpan.org</a>)<br>
+        <br>
+    </li>
+    <li>Apache 2.x &nbsp;&nbsp; (<a href="http://httpd.apache.org">httpd.apache.org</a>)<br>
+        <br>
+        Perform a standard installation of Apache.<br>
+        <br>
+    </li>
+    <li>Sybase, *or* FreeTDS (<a href="http://www.freetds.org">www.freetds.org</a>)<br>
+        <br>
+        The Sybase libraries are required for compiling PHP with Sybase support.<br>
+        <br>
+        You will have to edit the "interfaces" file of your sybase installation
+        and set up a section for your PICA LBS server (host name, port, etc):<br>
+        <br>
+        If you do <span style="font-style: italic;">not</span> have a Sybase
+        license for your operating system, you may be able to use FreeTDS
+        instead (untested). FreeTDS is a&nbsp; "open source" implementation of
+        the Sybase network protocol. <br>
+        <br>
+        You will also have to add a section to your "interfaces" file in the
+        Sybase directory, like this, assuming your PICA server has the IP
+        address 1.2.3.4:<br>
+        <br style="font-weight: bold;">
+
+        <div style="margin-left: 40px;">picaserver<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;query tcp
+            ether 1.2.3.4 2025<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;master
+            tcp ether 1.2.3.4 2025<br>
+        </div>
+        <br>
+        If you use FreeTDS, please consult the documentation on configuration
+        instructions.<br>
+        <br>
+    </li>
+    <li>MySQL (<a href="http://www.mysql.org">www.mysql.org</a>)<br>
+        <br>
+        Please use version 4.0.17 or newer. Older versions have not been tested.<br>
+        <br>
+        <span style="font-weight: bold;">WARNING:</span><br>
+        <br>
+
+        <div style="margin-left: 40px;">If you use these scripts in a
+            production environment,&nbsp;<span style="font-weight: bold;"></span><span
+                    style="font-weight: bold;">please </span>make sure that you secure
+            your MySQL installation! <br>
+            <br>
+            &nbsp;E.g., set a password for the database administrator (DBA), drop
+            the "test" database, etc. The script "mysql_secure_installation",&nbsp;
+            which is part of the MySQL distribution, will perform most of these
+            tasks automatically.<br>
+            <br>
+            Also, you must take care of performing regular backups ("dumps") of
+            your data base.<br>
+            <br>
+        </div>
+    </li>
+    <li>PHP 4.x (<a href="http://www.php.net">www.php.net</a>)<br>
+        <br>
+        PHP must be compiled with Sybase and MySQL support, using the
+        "--with-sybase and "--with-mysql" configure options. You should
+        also&nbsp; compile PHP as an apache2 module, i.e.
+        "--with-apxs2=/path/to/apache/bin/apxs2".<br>
+        <br>
+        Set up your httpd.conf so that Apache uses the PHP module,&nbsp; and so
+        that files with the ".php" extension are parsed by the PHP interpreter.
+        This is described in detail in the PHP installation manual.<br>
+        <br>
+        <span style="font-weight: bold;">NOTE: </span>PHP 5.x is untested,
+        and may or may not work!<br>
+    </li>
 </ul>
 <h3>Testing your environment<br>
 </h3>
 Create a file "test.php" in the document root of your webserver, with
 the following content:<br>
 <br>
+
 <div style="margin-left: 40px;">&lt;?php phpinfo(); ?&gt;<br>
 </div>
 <br>
@@ -116,214 +121,217 @@ You should see a PHP status page.&nbsp; Please check it, and make sure
 that:<br>
 <br>
 <ul>
-  <li>&nbsp;MySQL support is enabled</li>
-  <li>Sybase Support is enabled&nbsp;<br>
-  </li>
+    <li>&nbsp;MySQL support is enabled</li>
+    <li>Sybase Support is enabled&nbsp;<br>
+    </li>
 </ul>
 <br>
 If the PHP status page does not appear, or if MySQL or Sybase support
 is missing, <span style="font-weight: bold;">do not continue!</span>
 Check your installation and fix it!&nbsp;&nbsp;&nbsp; <br>
+
 <h3>Installation<br>
 </h3>
 <ol>
-  <li>Create a sub-directory in your web server's document root, e.g.
-"application", and unpack the contents of the installation ZIP file
-into that directory.<br>
-    <br>
-  </li>
-  <li>Create a new mysql database, and initialize the tables. The
-necessary steps are, roughly (user input is in bold face):<br>
-    <br>
-$ <span style="font-weight: bold;">mysql -p</span><br>
+    <li>Create a sub-directory in your web server's document root, e.g.
+        "application", and unpack the contents of the installation ZIP file
+        into that directory.<br>
+        <br>
+    </li>
+    <li>Create a new mysql database, and initialize the tables. The
+        necessary steps are, roughly (user input is in bold face):<br>
+        <br>
+        $ <span style="font-weight: bold;">mysql -p</span><br>
     <span style="font-style: italic;">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
 &nbsp;Enter password: </span><span style="font-weight: bold;">&lt;administrator
 password&gt;</span><br style="font-style: italic;">
     <span style="font-style: italic;">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
 &nbsp;Welcome to the MySQL monitor.&nbsp; Commands end with ; or \g.</span><br
- style="font-style: italic;">
+                style="font-style: italic;">
     <span style="font-style: italic;">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
 &nbsp;Your MySQL connection id is 1 to server version: 4.0.17</span><br
- style="font-style: italic;">
-    <br style="font-style: italic;">
+                style="font-style: italic;">
+        <br style="font-style: italic;">
     <span style="font-style: italic;">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
 &nbsp;Type 'help;' or '\h' for help. Type '\c' to clear the buffer.</span><br
- style="font-style: italic;">
-    <br>
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span style="font-style: italic;">mysql&gt;</span>
-    <span style="font-weight: bold;">create database application;</span><br>
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span style="font-style: italic;">Query
+                style="font-style: italic;">
+        <br>
+        &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span style="font-style: italic;">mysql&gt;</span>
+        <span style="font-weight: bold;">create database application;</span><br>
+        &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span style="font-style: italic;">Query
 OK, 1 row affected (0.20 sec)</span><br style="font-style: italic;">
-    <br style="font-style: italic;">
+        <br style="font-style: italic;">
     <span style="font-style: italic;">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
 &nbsp;mysql&gt;</span> <span style="font-weight: bold;">exit</span><br>
     <span style="font-style: italic;">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
 &nbsp;Bye</span><br style="font-style: italic;">
-    <br>
-&nbsp;&nbsp; $ <span style="font-weight: bold;">mysql -p application
+        <br>
+        &nbsp;&nbsp; $ <span style="font-weight: bold;">mysql -p application
 &lt; dbinit.sql</span><br>
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span style="font-style: italic;">Enter
+        &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span style="font-style: italic;">Enter
 password:</span> <span style="font-weight: bold;">&lt;administrator
 password&gt;<br>
     <br>
     </span></li>
-  <li><span style="font-weight: bold;"></span>You will probably have to
-edit the contents of the following database tables: <br>
-    <br>
-    <ul>
-      <li>user_type_names</li>
-      <li>user_types<br>
+    <li><span style="font-weight: bold;"></span>You will probably have to
+        edit the contents of the following database tables: <br>
         <br>
-      </li>
-    </ul>
-and possibly others. You may edit these tables either with "mysql",
-using SQL statements, or with a frontend such as phpmyadmin, see <a
- href="http://www.phpmyadmin.net">www.phpmyadmin.net</a>.<br>
-    <br>
-The meaning of the tables is described in the <a
- href="internal/html/index.html">internal system documentation</a>.<br>
-    <br>
-  </li>
-  <li>Now you will have to create two database user accounts that have
-limited access to the "application" database.<br>
-    <br>
-We will call these accounts "staff" and "nostaff", but the names are
-arbitrary.&nbsp; The necessary SQL statements are:<br>
-    <br>
-    <div style="margin-left: 40px;"><code>GRANT INSERT ON
-application.persons TO nostaff <br>
-&nbsp;&nbsp;&nbsp; IDENTIFIED BY 'secret1';<br>
-GRANT INSERT ON application.addresses TO nostaff;<br>
-GRANT SELECT ON application.usertype_names TO nostaff;<br>
-GRANT SELECT ON application.address_types TO nostaff;<br>
-GRANT SELECT ON application.usertypes TO nostaff;<br>
-    <br>
-GRANT SELECT ON application.* TO staff <br>
-&nbsp;&nbsp;&nbsp; IDENTIFIED BY 'secret2';<br>
-GRANT UPDATE ON application.serial_number TO staff; <br>
-GRANT UPDATE, DELETE ON application.persons TO staff; <br>
-GRANT UPDATE, DELETE ON application.addresses TO staff;<br>
-    <br>
-    <br>
-    </code></div>
-Of course, you should probably use better passwords ;-)<br>
-    <br>
-  </li>
-  <li>On the PICA LBS server, you have to create a Sybase database user
-that has SELECT privilege on the "borrower" table.<br>
-    <br>
-  </li>
-  <li>Edit at least the following PHP files:<br>
-    <br>
-    <ul>
-      <li><span style="font-weight: bold;">text.php</span><br>
+        <ul>
+            <li>user_type_names</li>
+            <li>user_types<br>
+                <br>
+            </li>
+        </ul>
+        and possibly others. You may edit these tables either with "mysql",
+        using SQL statements, or with a frontend such as phpmyadmin, see <a
+                href="http://www.phpmyadmin.net">www.phpmyadmin.net</a>.<br>
         <br>
-Text fragments that are used in the web interface.<br>
+        The meaning of the tables is described in the <a
+                href="internal/html/index.html">internal system documentation</a>.<br>
         <br>
-      </li>
-      <li><span style="font-weight: bold;">config.php </span><br>
-        <br>
-General configuration settings for the "non-staff" web interface. <br>
-        <br>
-You must adjust the name and the password for the "nostaff" database
-user.<br>
-        <br>
-      </li>
-      <li><span style="font-weight: bold;">admin/config.php</span><br>
-        <br>
-Configuration settings for the library staff's web interface<br>
-        <br>
-You must adjust the name and the password for the "staff" database user
-as well as the Sybase database user that has read access to your PICA
-database.<br>
-        <br>
-      </li>
-    </ul>
-  </li>
-  <li>When you have reached this point, everything should work
-except&nbsp; for the "Send to PICA" functionality in the staff's web
-interface&nbsp; (i.e. the creation of a new borrower account in the
-PICA system from a applicant's data).<br>
-    <br>
-You can now test the system by visiting http://webserver/application
-and enter a new application into the system. You may also visit the
-staff's web interface at http://webserver/application/admin, where you
-can&nbsp; view, edit or delete the new application record.<br>
-    <br>
-  </li>
-  <li>In a production system, you must now configure your web server so
-that:<br>
-    <br>
-    <ul>
-      <li> the directory "pica/" cannot be accessed at all by your
-webserver&gt;<br>
-        <br>
-      </li>
-      <li>the directory "admin/" is only accessible by your library's
-staff (e.g. password protection, IP address restriction<br>
-        <br>
-      </li>
-      <li>the top-level directory is accessible to the world.<br>
-        <br>
-      </li>
-    </ul>
-You may also want to enable SSL on your webserver for additional
-protection.<br>
-    <br>
-  </li>
-  <li>To enable the "Send to PICA" functionality, you will need&nbsp;
-to set up a client/server system both on the webserver and the PICA
-server.<br>
-    <br>
-  </li>
-  <ol>
-    <li>The perl script "pica/pica_upload_server" must be started on
-the PICA server, and must run under the "lbsprod" unix account. <br>
-      <br>
-There is a sample init.d script "pica_upload.rc" that you may use for
-this purpose.<br>
-      <br>
     </li>
-    <li>The perl script "pica/pica_upload_client" runs on the web
-server. It is started automatically when you press the "Send to PICA"
-button. Make sure that the script is executable by the the user account
-that your web server is running under.<br>
-      <br>
-Since the script contains a password, make sure that nobody but the
-webserver can read&nbsp; or execute the script! Otherwise, anybody who
-can login to your webserver can also modify borrower accounts on your
-PICA system!<br>
-      <br>
+    <li>Now you will have to create two database user accounts that have
+        limited access to the "application" database.<br>
+        <br>
+        We will call these accounts "staff" and "nostaff", but the names are
+        arbitrary.&nbsp; The necessary SQL statements are:<br>
+        <br>
+
+        <div style="margin-left: 40px;"><code>GRANT INSERT ON
+            application.persons TO nostaff <br>
+            &nbsp;&nbsp;&nbsp; IDENTIFIED BY 'secret1';<br>
+            GRANT INSERT ON application.addresses TO nostaff;<br>
+            GRANT SELECT ON application.usertype_names TO nostaff;<br>
+            GRANT SELECT ON application.address_types TO nostaff;<br>
+            GRANT SELECT ON application.usertypes TO nostaff;<br>
+            <br>
+            GRANT SELECT ON application.* TO staff <br>
+            &nbsp;&nbsp;&nbsp; IDENTIFIED BY 'secret2';<br>
+            GRANT UPDATE ON application.serial_number TO staff; <br>
+            GRANT UPDATE, DELETE ON application.persons TO staff; <br>
+            GRANT UPDATE, DELETE ON application.addresses TO staff;<br>
+            <br>
+            <br>
+        </code></div>
+        Of course, you should probably use better passwords ;-)<br>
+        <br>
     </li>
-    <li>You must edit both scripts before using them. You need to
-adjust these parameters:<br>
-      <ul>
-        <li>@ip_ok in pica_upload_server. This is an array of IP
-addresses that are allowed to connect to the server. You should enter
-the IP address of your web server here.<br>
-          <br>
+    <li>On the PICA LBS server, you have to create a Sybase database user
+        that has SELECT privilege on the "borrower" table.<br>
+        <br>
+    </li>
+    <li>Edit at least the following PHP files:<br>
+        <br>
+        <ul>
+            <li><span style="font-weight: bold;">text.php</span><br>
+                <br>
+                Text fragments that are used in the web interface.<br>
+                <br>
+            </li>
+            <li><span style="font-weight: bold;">config.php </span><br>
+                <br>
+                General configuration settings for the "non-staff" web interface. <br>
+                <br>
+                You must adjust the name and the password for the "nostaff" database
+                user.<br>
+                <br>
+            </li>
+            <li><span style="font-weight: bold;">admin/config.php</span><br>
+                <br>
+                Configuration settings for the library staff's web interface<br>
+                <br>
+                You must adjust the name and the password for the "staff" database user
+                as well as the Sybase database user that has read access to your PICA
+                database.<br>
+                <br>
+            </li>
+        </ul>
+    </li>
+    <li>When you have reached this point, everything should work
+        except&nbsp; for the "Send to PICA" functionality in the staff's web
+        interface&nbsp; (i.e. the creation of a new borrower account in the
+        PICA system from a applicant's data).<br>
+        <br>
+        You can now test the system by visiting http://webserver/application
+        and enter a new application into the system. You may also visit the
+        staff's web interface at http://webserver/application/admin, where you
+        can&nbsp; view, edit or delete the new application record.<br>
+        <br>
+    </li>
+    <li>In a production system, you must now configure your web server so
+        that:<br>
+        <br>
+        <ul>
+            <li> the directory "pica/" cannot be accessed at all by your
+                webserver&gt;<br>
+                <br>
+            </li>
+            <li>the directory "admin/" is only accessible by your library's
+                staff (e.g. password protection, IP address restriction<br>
+                <br>
+            </li>
+            <li>the top-level directory is accessible to the world.<br>
+                <br>
+            </li>
+        </ul>
+        You may also want to enable SSL on your webserver for additional
+        protection.<br>
+        <br>
+    </li>
+    <li>To enable the "Send to PICA" functionality, you will need&nbsp;
+        to set up a client/server system both on the webserver and the PICA
+        server.<br>
+        <br>
+    </li>
+    <ol>
+        <li>The perl script "pica/pica_upload_server" must be started on
+            the PICA server, and must run under the "lbsprod" unix account. <br>
+            <br>
+            There is a sample init.d script "pica_upload.rc" that you may use for
+            this purpose.<br>
+            <br>
         </li>
-        <li>You should change $password in both pica_upload_server and
-pica_upload_client. Both passwords must match!<br>
-          <br>
+        <li>The perl script "pica/pica_upload_client" runs on the web
+            server. It is started automatically when you press the "Send to PICA"
+            button. Make sure that the script is executable by the the user account
+            that your web server is running under.<br>
+            <br>
+            Since the script contains a password, make sure that nobody but the
+            webserver can read&nbsp; or execute the script! Otherwise, anybody who
+            can login to your webserver can also modify borrower accounts on your
+            PICA system!<br>
+            <br>
         </li>
-        <li>You should also check and adjust the paths in
-pica_upload_server.</li>
-      </ul>
-      <br>
-      <span style="font-weight: bold;">WARNING:&nbsp; </span>Note that
-there is NO DATA ENCRYPTION between client and server! <br>
-      <br>
-&nbsp;In a production environment, you will probably want to set up an
-encrypted&nbsp; tunnel (SSH, SSL) for better security.<br>
-      <br>
+        <li>You must edit both scripts before using them. You need to
+            adjust these parameters:<br>
+            <ul>
+                <li>@ip_ok in pica_upload_server. This is an array of IP
+                    addresses that are allowed to connect to the server. You should enter
+                    the IP address of your web server here.<br>
+                    <br>
+                </li>
+                <li>You should change $password in both pica_upload_server and
+                    pica_upload_client. Both passwords must match!<br>
+                    <br>
+                </li>
+                <li>You should also check and adjust the paths in
+                    pica_upload_server.
+                </li>
+            </ul>
+            <br>
+            <span style="font-weight: bold;">WARNING:&nbsp; </span>Note that
+            there is NO DATA ENCRYPTION between client and server! <br>
+            <br>
+            &nbsp;In a production environment, you will probably want to set up an
+            encrypted&nbsp; tunnel (SSH, SSL) for better security.<br>
+            <br>
+        </li>
+    </ol>
+    <li>You can now test the "Send to PICA" functionality.<br>
+        <br>
     </li>
-  </ol>
-  <li>You can now test the "Send to PICA" functionality.<br>
-    <br>
-  </li>
-  <li>You are done! Congratulations!<br>
-  </li>
+    <li>You are done! Congratulations!<br>
+    </li>
 </ol>
 <h3>Contact</h3>
 If you have problems or want to make suggestions, please contact:<br>

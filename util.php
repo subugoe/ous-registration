@@ -31,27 +31,29 @@ require_once('text.php');
 
 function db_query_mysql($link, $q, $kw) {
 
-	foreach ($kw as $k => $v) {
-		$kw[$k] = mysql_escape_string($v);
-	}
+    foreach ($kw as $k => $v) {
+        $kw[$k] = mysql_escape_string($v);
+    }
 
-	$q = strtr($q, $kw);
+    $q = strtr($q, $kw);
 
-	// print "query: " . $q . "<br>";
+    // print "query: " . $q . "<br>";
 
-	($r = @ mysql_query($q, $link)) or db_error_mysql();
-	
-	$result = array(); $i = 1;
-		
-	if (@ mysql_num_rows($r) > 0)  {
-		while ($row = @ mysql_fetch_array($r))  {
-			$result[$i++] = $row;		
-		}
-	}
+    ($r = @ mysql_query($q, $link)) or db_error_mysql();
 
-	return $result;
+    $result = array();
+    $i = 1;
+
+    if (@ mysql_num_rows($r) > 0) {
+        while ($row = @ mysql_fetch_array($r)) {
+            $result[$i++] = $row;
+        }
+    }
+
+    return $result;
 }
-/// \brief conditionally print text as a HTML hyperlink 
+
+/// \brief conditionally print text as a HTML hyperlink
 ///
 /// \param $text, $url, $condition see below
 ///
@@ -61,10 +63,11 @@ function db_query_mysql($link, $q, $kw) {
 
 
 function link_maybe($text, $url, $condition) {
-	if ($condition) 
-		print "<a href=\"$url\">$text</a>";
-	else
-		print "<strong>$text</strong>";
+    if ($condition) {
+        print "<a href=\"$url\">$text</a>";
+    } else {
+        print "<strong>$text</strong>";
+    }
 }
 
 /// \brief redirect the user to a different URL
@@ -75,22 +78,22 @@ function link_maybe($text, $url, $condition) {
 /// \returns nothing
 
 function redirect($url) {
-	global $text;
+    global $text;
 
-	$kw = array ('@bodyattr@' => "",
-		     '@notabene@' => "", 
-		     '@url@' => "$url",
-		     '@url-de@' => "$url",
-		     '@url-en@' => "$url");
+    $kw = array('@bodyattr@' => "",
+        '@notabene@' => "",
+        '@url@' => "$url",
+        '@url-de@' => "$url",
+        '@url-en@' => "$url");
 
-	header("Location: " . $url);
-	
-	// for older browsers that don't support redirect
+    header("Location: " . $url);
 
-	print_header($kw);
-	print strtr($text['redirect'], $kw);
-	print_footer($kw);
-	exit(0);
+    // for older browsers that don't support redirect
+
+    print_header($kw);
+    print strtr($text['redirect'], $kw);
+    print_footer($kw);
+    exit(0);
 }
 
 
@@ -112,14 +115,17 @@ function redirect($url) {
 
 function param_ok($allowed, $k, $v) {
 
-	$ok = TRUE;
+    $ok = TRUE;
 
-	if (!isset($allowed[$k]))
-		$ok = FALSE;
-	else if (!preg_match($allowed[$k], $v))
-		$ok = FALSE;
+    if (!isset($allowed[$k])) {
+        $ok = FALSE;
+    } else {
+        if (!preg_match($allowed[$k], $v)) {
+            $ok = FALSE;
+        }
+    }
 
-	return $ok;
+    return $ok;
 
 }
 
@@ -137,87 +143,93 @@ function param_ok($allowed, $k, $v) {
 /// \returns nothing
 
 function print_table($table, $cols, $attr, $dblink, $subst) {
-	
-	print "<table width=\"100%\" " . $attr . " >\n<tr>\n";
 
-	$c = 1;
+    print "<table width=\"100%\" " . $attr . " >\n<tr>\n";
 
-	// $col_width1 = (35 / $cols);
-	// $col_width2 = (65 / $cols);
+    $c = 1;
 
-	if (empty($table))
-		return(TRUE);
+    // $col_width1 = (35 / $cols);
+    // $col_width2 = (65 / $cols);
 
-	foreach ($table as $row ) {
+    if (empty($table)) {
+        return (TRUE);
+    }
 
-		// do SQL query
+    foreach ($table as $row) {
+
+        // do SQL query
 
 
-		if (isset ($row["value"])) {
+        if (isset ($row["value"])) {
 
-			print "<td width=\"30%\"><strong>" . $row["label"] ;
-			print "</strong></td>\n" ;	
-			print "<td>" . htmlentities(strtr($row["value"], $subst)) . "</td>";
+            print "<td width=\"30%\"><strong>" . $row["label"];
+            print "</strong></td>\n";
+            print "<td>" . htmlentities(strtr($row["value"], $subst)) . "</td>";
 
-		} else if (isset ($row["query"])) {
-		
-			$r = db_query_mysql($dblink, $row["query"] , $subst);
+        } else {
+            if (isset ($row["query"])) {
 
-			if (empty($r))  {
-				print "<td>&nbsp;</td>\n"; 
-				print "<td>&nbsp;</td>\n"; 
-			} else {
+                $r = db_query_mysql($dblink, $row["query"], $subst);
 
-				print "<td width=\"30%\"><strong>";
-				print 	$row["label"] . "</strong></td>\n";
+                if (empty($r)) {
+                    print "<td>&nbsp;</td>\n";
+                    print "<td>&nbsp;</td>\n";
+                } else {
 
-				print "<td>";
+                    print "<td width=\"30%\"><strong>";
+                    print    $row["label"] . "</strong></td>\n";
 
-				foreach ($r[1] as $k => $v)  {
-					if (is_numeric($k)) 
-						print htmlentities($v) . "&nbsp;";
-				}		
-			
-				print "&nbsp;</td>\n";
-			}
-		} else if (isset($row["fields"])) {
-			global $fields;
+                    print "<td>";
 
-			// print label
+                    foreach ($r[1] as $k => $v) {
+                        if (is_numeric($k)) {
+                            print htmlentities($v) . "&nbsp;";
+                        }
+                    }
 
-			print "<td><strong>" . $row["label"] ;
-			print "</strong></td>\n" ;	
+                    print "&nbsp;</td>\n";
+                }
+            } else {
+                if (isset($row["fields"])) {
+                    global $fields;
 
-			// print html form for user input
+                    // print label
 
-			print "<td>";
+                    print "<td><strong>" . $row["label"];
+                    print "</strong></td>\n";
 
-			foreach ($row["fields"] as $f) {	
+                    // print html form for user input
 
-				// field key, field value
-				$fk = $f;
-				$fv = (isset($_SESSION[$fk])) ? 
-					$_SESSION[$fk] : "";
+                    print "<td>";
 
-				print input_control($f, $fk, $fv ); 
-				print "&nbsp;&nbsp;";
-			}
-			print "</td>\n"; 
-	
-		} else {
-			print "<td>&nbsp;</td>\n"; 
-			print "<td>&nbsp;</td>\n"; 
-		}
+                    foreach ($row["fields"] as $f) {
 
-		if ($c < $cols){
-			$c++;
-		} else {
-			print "</tr>\n<tr>\n";
-			$c = 1;
-		}		
-	}
+                        // field key, field value
+                        $fk = $f;
+                        $fv = (isset($_SESSION[$fk])) ?
+                            $_SESSION[$fk] : "";
 
-	print "</tr></table>";
+                        print input_control($f, $fk, $fv);
+                        print "&nbsp;&nbsp;";
+                    }
+                    print "</td>\n";
+
+                } else {
+                    print "<td>&nbsp;</td>\n";
+                    print "<td>&nbsp;</td>\n";
+                }
+            }
+        }
+
+        if ($c < $cols) {
+            $c++;
+        } else {
+            print "</tr>\n<tr>\n";
+            $c = 1;
+        }
+    }
+
+    print "</tr></table>";
 
 }
 
@@ -231,35 +243,37 @@ function print_table($table, $cols, $attr, $dblink, $subst) {
 /// \returns normalized user input
 
 function normalize_input($v) {
-	$v = preg_replace("/\\s+/", " ", $v);
-	$v = preg_replace("/^ /", "", $v);
-	$v = preg_replace("/ $/", "", $v);
+    $v = preg_replace("/\\s+/", " ", $v);
+    $v = preg_replace("/^ /", "", $v);
+    $v = preg_replace("/ $/", "", $v);
 
-	$v = strtr($v, 'ÀÁÂÃÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕØÙÚÛÝàáâãåæçèéêëìíîïñòóôõøùúûýÿ',
-		       'AAAAAACEEEEIIIIDNOOOOOUUUYaaaaaaceeeeiiiinooooouuuyy');
+    $v = strtr($v, 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+        'AAAAAACEEEEIIIIDNOOOOOUUUYaaaaaaceeeeiiiinooooouuuyy');
 
-	return $v;	
+    return $v;
 }
 
 function print_header($kw) {
-	global $text;
+    global $text;
 
-	header("Content-Type: text/html; charset=ISO-8859-1");
+    header("Content-Type: text/html; charset=ISO-8859-1");
 
-	if (!isset ($_SESSION['in_body']))
-		print strtr($text['html_header'], $kw);
+    if (!isset ($_SESSION['in_body'])) {
+        print strtr($text['html_header'], $kw);
+    }
 
-	$_SESSION['in_body'] = TRUE;
+    $_SESSION['in_body'] = TRUE;
 }
 
 function print_footer($kw) {
 
-	global $text;
+    global $text;
 
-	if (isset ($_SESSION['in_body']))
-		print strtr($text['html_footer'], $kw);
+    if (isset ($_SESSION['in_body'])) {
+        print strtr($text['html_footer'], $kw);
+    }
 
-	unset ($_SESSION['in_body']);
+    unset ($_SESSION['in_body']);
 }
 
 
@@ -269,24 +283,24 @@ function print_footer($kw) {
 /// and exit
 
 function db_error_mysql() {
-	error_msg( "MYSQL: " . mysql_error() . " [" . mysql_errno() . "]" ); 
-	exit(0);
+    error_msg("MYSQL: " . mysql_error() . " [" . mysql_errno() . "]");
+    exit(0);
 }
 
 function error_msg($msg) {
-	global $text;
+    global $text;
 
-	$kw =  array ( '@bodyattr@' => "",
-		 '@notabene@' => "", 
-		 '@url-de@' => "index.php?lang=de",
-		 '@url-en@' => "index.php?lang=en",
-		 '@msg@' => $msg );
+    $kw = array('@bodyattr@' => "",
+        '@notabene@' => "",
+        '@url-de@' => "index.php?lang=de",
+        '@url-en@' => "index.php?lang=en",
+        '@msg@' => $msg);
 
-	print_header($kw);
-	print strtr($text['generic_error'],$kw);
-	print_footer($kw);
+    print_header($kw);
+    print strtr($text['generic_error'], $kw);
+    print_footer($kw);
 
-	exit(0);
+    exit(0);
 }
 
 

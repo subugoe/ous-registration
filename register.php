@@ -11,8 +11,9 @@ session_start();
 
 $lang = (isset($_GET['lang'])) ? $_GET['lang'] : $lang_default;
 
-if (!isset($text_multi[$lang]))
+if (!isset($text_multi[$lang])) {
     $lang = $lang_default;
+}
 
 $text = $text_multi[$lang];
 $buttons = $buttons_multi[$lang];
@@ -33,8 +34,9 @@ if (isset($_SESSION['edit_finished'])) {
     $kw = array();
 
     foreach ($fields as $k => $v) {
-        if (isset($_SESSION[$k]))
+        if (isset($_SESSION[$k])) {
             $kw['@' . $k . '@'] = $_SESSION[$k];
+        }
     }
 
     // last page of form, end of session
