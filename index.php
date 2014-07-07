@@ -95,7 +95,7 @@
 
 
 require_once('text.php');
-require_once ('config.php');
+require_once('config.php');
 require_once('util.php');
 require_once('fields.php');
 
@@ -103,17 +103,18 @@ session_start();
 
 $lang = (isset($_GET['lang'])) ? $_GET['lang'] : $lang_default;
 
-if (!isset($text_multi[$lang]))
-	$lang = $lang_default;
+if (!isset($text_multi[$lang])) {
+    $lang = $lang_default;
+}
 
-$text    = $text_multi[$lang];
+$text = $text_multi[$lang];
 $buttons = $buttons_multi[$lang];
-$months =  $months_multi[$lang];
+$months = $months_multi[$lang];
 
-$cancel=htmlentities("index.php?lang=@lang@");
-$finish=htmlentities("register.php?lang=@lang@");
+$cancel = htmlentities("index.php?lang=@lang@");
+$finish = htmlentities("register.php?lang=@lang@");
 
-session_destroy();	// start with a fresh session 
+session_destroy(); // start with a fresh session
 redirect("edit.php?lang=$lang&finishURL=$finish&cancelURL=$cancel");
 
 ?>

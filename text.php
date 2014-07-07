@@ -27,7 +27,7 @@ $text_multi = array();
 
 $text_multi['de'] = array(
 
-	'html_header' => '
+    'html_header' => '
 		<html><head>
 		<link type="text/css" rel="stylesheet" href="style/anmeldung.css">
 		<!-- ***** FAQ POP-UP ***** -->	
@@ -67,35 +67,34 @@ fenster = window.open("http://www.biblio.tu-bs.de/anmeldung2/help.php","PopUp","
 		',
 // NEU Okt.2008
 //	'user_info' => ' <strong> <p> Geb�hr f�r Benutzerausweis: 5 EUR</strong>   <br></p>',
-		
-	'step1' => 'Schritt ',
-	'step2' => ' von 4',	
-	
-	
-	
-	'html_footer' => '<hr> 
+
+    'step1' => 'Schritt ',
+    'step2' => ' von 4',
+
+
+    'html_footer' => '<hr>
 			 <p align="right">
 			 <a href="doc/">&Uuml;ber diese Software...</a>
 			 </body></html>',
-			 
+
 // +++++++++++++++++++++++++++++++++++++++++++++++++++EMAIL BENACHRICHTIGUNG+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // ************************************************ V2.0 Formulartext mit Checkbox ***********************************************************
 
 //Checkboxtext
 
- 'disclaimer' => 
- ' <p><b>*</b>
-Ich bitte um elektronische Benachrichtigung durch die Universit&auml;tsbibliothek an meine oben aufgef&uuml;hrte E-Mail-Adresse und erkl&auml;re mein Einverst&auml;ndnis mit der unverschl&uuml;sselten &Uuml;bertragung der Daten. Ich erkl&auml;re mich ausdr&uuml;cklich damit einverstanden, dass elektronische Benachrichtigungen (einschlie&szlig;lich Mahnungen) an die letzte der Universit&auml;tsbibliothek gemeldete Adresse dem Inhalt nach als bekannt gelten und ich selbst f&uuml;r den Abruf dieser Benachrichtigungen und f&uuml;r die unverz&uuml;gliche Meldung von Adress-&Auml;nderungen an die Unversit&auml;tsbibliothek verantwortlich bin.</p>',
+    'disclaimer' =>
+        ' <p><b>*</b>
+       Ich bitte um elektronische Benachrichtigung durch die Universit&auml;tsbibliothek an meine oben aufgef&uuml;hrte E-Mail-Adresse und erkl&auml;re mein Einverst&auml;ndnis mit der unverschl&uuml;sselten &Uuml;bertragung der Daten. Ich erkl&auml;re mich ausdr&uuml;cklich damit einverstanden, dass elektronische Benachrichtigungen (einschlie&szlig;lich Mahnungen) an die letzte der Universit&auml;tsbibliothek gemeldete Adresse dem Inhalt nach als bekannt gelten und ich selbst f&uuml;r den Abruf dieser Benachrichtigungen und f&uuml;r die unverz&uuml;gliche Meldung von Adress-&Auml;nderungen an die Unversit&auml;tsbibliothek verantwortlich bin.</p>',
 
 // Zusammenfassungstext
-'disclaimer_info' =>
-	'<p><h2>Benachrichtigung per E-Mail</h2>
-	Ich bitte um elektronische Benachrichtigung durch die Universit&auml;tsbibliothek an meine oben aufgef&uuml;hrte E-Mail-Adresse und erkl&auml;re mein Einverst&auml;ndnis mit der unverschl&uuml;sselten &Uuml;bertragung der Daten. Ich erkl&auml;re mich ausdr&uuml;cklich damit einverstanden, dass elektronische Benachrichtigungen (einschlie&szlig;lich Mahnungen) an die letzte der Universit&auml;tsbibliothek gemeldete Adresse dem Inhalt nach als bekannt gelten und ich selbst f&uuml;r den Abruf dieser Benachrichtigungen und f&uuml;r die unverz&uuml;gliche Meldung von Adress-&Auml;nderungen an die Unversit&auml;tsbibliothek verantwortlich bin.</p>',
+    'disclaimer_info' =>
+        '<p><h2>Benachrichtigung per E-Mail</h2>
+        Ich bitte um elektronische Benachrichtigung durch die Universit&auml;tsbibliothek an meine oben aufgef&uuml;hrte E-Mail-Adresse und erkl&auml;re mein Einverst&auml;ndnis mit der unverschl&uuml;sselten &Uuml;bertragung der Daten. Ich erkl&auml;re mich ausdr&uuml;cklich damit einverstanden, dass elektronische Benachrichtigungen (einschlie&szlig;lich Mahnungen) an die letzte der Universit&auml;tsbibliothek gemeldete Adresse dem Inhalt nach als bekannt gelten und ich selbst f&uuml;r den Abruf dieser Benachrichtigungen und f&uuml;r die unverz&uuml;gliche Meldung von Adress-&Auml;nderungen an die Unversit&auml;tsbibliothek verantwortlich bin.</p>',
 
 // ********************************************************************************************************************************************
 
-	'info_1' => '
+    'info_1' => '
 		<p><h2>Wichtiger Hinweis</h2>
 		Die Angabe Ihrer Daten ist freiwillig. Ohne Ihre Daten ist eine
 		Ausleihe jedoch nicht m&ouml;glich. Die Erhebung der
@@ -132,7 +131,7 @@ Ich bitte um elektronische Benachrichtigung durch die Universit&auml;tsbibliothe
 		Eigentum der Bibliothek und wird bei Abmeldung 
 		zur&uuml;ckgegeben.<p>',
 
-	'info_2' => '
+    'info_2' => '
 		<h2>Ihre Anmeldung wurde registriert</h2>
 		Der Bibliotheksausweis kann von Ihnen 
 		<strong>pers&ouml;nlich</strong>
@@ -163,7 +162,7 @@ Ich bitte um elektronische Benachrichtigung durch die Universit&auml;tsbibliothe
 		Zum Online-Katalog der UB</a> 
 		',
 
-	"sign_here" => '<br><br><table border="0" width="100%" >
+    "sign_here" => '<br><br><table border="0" width="100%" >
 			<tr>
 			    <td><strong>Braunschweig, den @today@</strong></td>
 		     	    <td> &nbsp; </td>
@@ -179,24 +178,24 @@ Ich bitte um elektronische Benachrichtigung durch die Universit&auml;tsbibliothe
 			</tr>
 			</table>',
 
-	"confirm_submit" => 
-	'<br><strong>Benutzer trotzdem in PICA &uuml;bernehmen?&nbsp;</strong>',
+    "confirm_submit" =>
+        '<br><strong>Benutzer trotzdem in PICA &uuml;bernehmen?&nbsp;</strong>',
 
-	"confirm_delete" => 
-	    '<br><strong>Diesen Datensatz wirklich l&ouml;schen?&nbsp;</strong>',
+    "confirm_delete" =>
+        '<br><strong>Diesen Datensatz wirklich l&ouml;schen?&nbsp;</strong>',
 
-	"confirm_delete_all" => 
-	    '<br><strong>Tats&auml;chlich <em>alle</em> bearbeiteten Datens&auml;tze l&ouml;schen?&nbsp;</strong>',
+    "confirm_delete_all" =>
+        '<br><strong>Tats&auml;chlich <em>alle</em> bearbeiteten Datens&auml;tze l&ouml;schen?&nbsp;</strong>',
 
-	// error messages
+    // error messages
 
-	"user_account_conflict" =>' 
+    "user_account_conflict" => '
 		<h1>Benutzer ist m&ouml;glicherweise bereits angemeldet!</h1>
 	 	Dieser Benutzer ist  m&ouml;glicherweise bereits angemeldet.
 		Es wurde eine &Auml;hnlichkeit mit folgenden 
 		PICA-Datens&auml;tzen festgestellt:',
-	
-	"generic_error" => '
+
+    "generic_error" => '
 		<h1> Es ist ein Fehler aufgetreten! </h1>
 		Die Anmeldung ist fehlgeschlagen. 
 		Bitte versuchen Sie es noch einmal. Falls der Fehler 
@@ -206,55 +205,55 @@ Ich bitte um elektronische Benachrichtigung durch die Universit&auml;tsbibliothe
 		<pre>@msg@</pre> <p>
 		<a href="index.php?lang=de">Weiter ...</a> ',
 
-	"error" => "<img src=\"./img/err.png\" alt=\"[X]\"> &nbsp;",
+    "error" => "<img src=\"./img/err.png\" alt=\"[X]\"> &nbsp;",
 
-	"error_msg" => ' <strong>Fehlende oder ung&uuml;ltige Eingabe!</strong>
+    "error_msg" => ' <strong>Fehlende oder ung&uuml;ltige Eingabe!</strong>
 		Bitte die markierten Felder korrigieren!<br><br>',
 
-	"db_empty" => "<strong>Keine Eintr&auml;ge in der Datenbank!</strong>",
+    "db_empty" => "<strong>Keine Eintr&auml;ge in der Datenbank!</strong>",
 
-	"conflict_regno" => 
-    	'<h1>Fehler!</h1>
-	Die &Uuml;berpr&uuml;fung der Registriernummer "@regno@" ist gescheitert! <p>
-	Entweder ist die Registriernummer bereits in der PICA-Datenbank 
-	vorhanden, oder es ist ein Fehler beim Datenbankzugriff aufgetreten.<p> 
-    	M&ouml;gliche Ursachen:
-    	<ul>
-    	<li> Falsche Matrikelnummer in der Online-Anmeldung
-    	<li> Falsche Registriernummer im PICA-Datensatz
-    	<li> Fehler im Programm
-    	<li> Probleme mit der PICA-Datenbank
-    	</ul>
-    	Der Vorgang wurde abgebrochen. Bitte beseitigen Sie
-    	die Fehlerursache, und versuchen Sie es danach erneut.
-	Falls der Fehler sich nicht beseitigen l&auml;&szlig;t, 
-	verst&auml;ndigen Sie bitte die EDV-Abteilung.<p>
-	<a href="index.php?lang=de">Weiter ...</a>
-	',
+    "conflict_regno" =>
+        '<h1>Fehler!</h1>
+    Die &Uuml;berpr&uuml;fung der Registriernummer "@regno@" ist gescheitert! <p>
+    Entweder ist die Registriernummer bereits in der PICA-Datenbank
+    vorhanden, oder es ist ein Fehler beim Datenbankzugriff aufgetreten.<p>
+        M&ouml;gliche Ursachen:
+        <ul>
+        <li> Falsche Matrikelnummer in der Online-Anmeldung
+        <li> Falsche Registriernummer im PICA-Datensatz
+        <li> Fehler im Programm
+        <li> Probleme mit der PICA-Datenbank
+        </ul>
+        Der Vorgang wurde abgebrochen. Bitte beseitigen Sie
+        die Fehlerursache, und versuchen Sie es danach erneut.
+    Falls der Fehler sich nicht beseitigen l&auml;&szlig;t,
+    verst&auml;ndigen Sie bitte die EDV-Abteilung.<p>
+    <a href="index.php?lang=de">Weiter ...</a>
+    ',
 
-	"redirect" => '
+    "redirect" => '
 	<h1>Sie werden umgeleitet!</h1>
 
 	Sie werden automatisch auf eine neue Webseite umgeleitet.
 	Sollte die Umleitung nicht funktionieren, klicken Sie bitte
 	<a href="@url@">hier</a>.',
 
-	'sex_m'         => "m�nnlich",
-	'sex_w'         => "weiblich",
+    'sex_m' => "m�nnlich",
+    'sex_w' => "weiblich",
 
-	'status'	=> "Status",
-	'status_new'	=> "neu",
-	'status_old'	=> "bearbeitet",
-	
-	'order'		=> "Sortierung",
-	'order_asc'	=> "aufsteigend",
-	'order_desc'	=> "absteigend",
+    'status' => "Status",
+    'status_new' => "neu",
+    'status_old' => "bearbeitet",
 
-	'details'	=> "Details ...",
-	'mahnaddr'	=> "Mahnaddresse" ,
-	'i_am'		=> "Ich bin..." ,
-	'barcode'	=> "Barcode",
-	'institute'	=> "Institut",
+    'order' => "Sortierung",
+    'order_asc' => "aufsteigend",
+    'order_desc' => "absteigend",
+
+    'details' => "Details ...",
+    'mahnaddr' => "Mahnaddresse",
+    'i_am' => "Ich bin...",
+    'barcode' => "Barcode",
+    'institute' => "Institut",
 //	'email' => "E-Mailadresse*",
 );
 
@@ -457,17 +456,17 @@ $buttons_multi = array();
 */
 //***************************REMOVE ENGLISH**********************************
 $buttons_multi['de'] = array(
-	"ok"          => "OK",
-	"cancel"      => "Abbrechen",
-	"next"	      => "Weiter",
-	"prev"	      => "Zur�ck",
-	"finish"      => "Anmeldung absenden",
-	"print"       => "Ausdrucken",
-	"delete"      => "L�schen",
-	"delete_all"  => "Alle Datens�tze l�schen",
-	"goto_index"  => "Zur�ck zur �bersicht",
-	"submit"      => "Nach PICA �bernehmen",
-	"edit"        => "Korrigieren"
+    "ok" => "OK",
+    "cancel" => "Abbrechen",
+    "next" => "Weiter",
+    "prev" => "Zur�ck",
+    "finish" => "Anmeldung absenden",
+    "print" => "Ausdrucken",
+    "delete" => "L�schen",
+    "delete_all" => "Alle Datens�tze l�schen",
+    "goto_index" => "Zur�ck zur �bersicht",
+    "submit" => "Nach PICA �bernehmen",
+    "edit" => "Korrigieren"
 );
 //***************************REMOVE ENGLISH**********************************
 /*
@@ -492,10 +491,10 @@ $buttons_multi['en'] = array(
 
 $months_multi = array();
 
-$months_multi['de'] = array ( "01" => "Jan", "02" => "Feb", "03" => "M�r",
-				 "04" => "Apr", "05" => "Mai", "06" => "Jun",
-				 "07" => "Jul", "08" => "Aug", "09" => "Sep", 
-				 "10" => "Okt", "11" => "Nov", "12" => "Dez" ); 
+$months_multi['de'] = array("01" => "Jan", "02" => "Feb", "03" => "M�r",
+    "04" => "Apr", "05" => "Mai", "06" => "Jun",
+    "07" => "Jul", "08" => "Aug", "09" => "Sep",
+    "10" => "Okt", "11" => "Nov", "12" => "Dez");
 //***************************REMOVE ENGLISH**********************************
 /*
 $months_multi['en'] = array ( "01" => "Jan", "02" => "Feb", "03" => "Mar",
@@ -514,40 +513,40 @@ $months_multi['en'] = array ( "01" => "Jan", "02" => "Feb", "03" => "Mar",
 $field_labels = array();
 
 $field_labels['de'] = array(
-	'last_name'     =>  "Nachname",
-	'first_name'    => "Vorname",
-	'title'         => "Akad. Titel",
-	'sex'           => "Geschlecht",
-	'birthday'      => "Geburtsdatum",
-	'usertype'      => "Nutzertyp",
-	'student_id'    => "Matrikelnummer",
-	'email_checkbox' => "Benachrichtigung per E-Mail<br />Falls gew&uuml;nscht, nebenstehend Haken setzen. N�heres siehe unten!*",
-	'email'	=> "E-Mail-Adresse",
-	'email_confirm' => "E-Mail-Adresse (Wdh.)",
-	'carry_over_1'  => "c/o",
-	'street_1'      => "Str.",
+    'last_name' => "Nachname",
+    'first_name' => "Vorname",
+    'title' => "Akad. Titel",
+    'sex' => "Geschlecht",
+    'birthday' => "Geburtsdatum",
+    'usertype' => "Nutzertyp",
+    'student_id' => "Matrikelnummer",
+    'email_checkbox' => "Benachrichtigung per E-Mail<br />Falls gew&uuml;nscht, nebenstehend Haken setzen. N�heres siehe unten!*",
+    'email' => "E-Mail-Adresse",
+    'email_confirm' => "E-Mail-Adresse (Wdh.)",
+    'carry_over_1' => "c/o",
+    'street_1' => "Str.",
 //  TESTANZEIGE PICA USER GROUP --- NICHT F�R PRODUKTIVBETRIEB !!!!!!!!!!!!!!	
 //	'pica_user_group' => "TEST: Pica User Group",
 //  TESTANZEIGE PICA USER GROUP --- NICHT F�R PRODUKTIVBETRIEB !!!!!!!!!!!!!!
-	"house_1"       => "Nr.",
-	"room_1"        => "Zimmer",
-	"zip_1"  	=> "PLZ",
-	"town_1"  	=> "Ort",
-	"phone_1"  	=> "Telefon",
-	"mobile_1"  	=> "Mobil",
-	'carry_over_2'  => "c/o",
-	'street_2'      => "Str.",
-	"house_2"       => "Nr.",
-	"room_2"        => "Zimmer",
-	"zip_2"  	=> "PLZ",
-	"town_2"  	=> "Ort",
-	"phone_2"  	=> "Telefon",
-	"mobile_2"  	=> "Mobil",
-	"nametag"  	=> "Namensk&uuml;rzel",
-	"notabene"  	=> "Seriennummer",
-	"expiry_date"  	=> "Ablaufdatum",
-	"entry_date"  	=> "Eingabedatum",
-	"password"	=> "Passwort"
+    "house_1" => "Nr.",
+    "room_1" => "Zimmer",
+    "zip_1" => "PLZ",
+    "town_1" => "Ort",
+    "phone_1" => "Telefon",
+    "mobile_1" => "Mobil",
+    'carry_over_2' => "c/o",
+    'street_2' => "Str.",
+    "house_2" => "Nr.",
+    "room_2" => "Zimmer",
+    "zip_2" => "PLZ",
+    "town_2" => "Ort",
+    "phone_2" => "Telefon",
+    "mobile_2" => "Mobil",
+    "nametag" => "Namensk&uuml;rzel",
+    "notabene" => "Seriennummer",
+    "expiry_date" => "Ablaufdatum",
+    "entry_date" => "Eingabedatum",
+    "password" => "Passwort"
 );
 
 //***************************REMOVE ENGLISH**********************************
